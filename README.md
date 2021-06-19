@@ -5,6 +5,7 @@ Work in progress...
 
 ### Current features
 * Password generator  
+* Write generated password to file (.store)
 
 ### Usage
 Repository contains a Makefile for:   
@@ -12,5 +13,11 @@ Repository contains a Makefile for:
 * deleting executable (**make fclean**)  
 * recompiling (**make re**)    
 
-Run in program directory:  
-./pwd
+Generate password:  
+```ts
+./pwd generate
+```
+Generate password for an application (e.g. gmail) and write to file:  
+```ts
+./pwd generate gmail
+```
