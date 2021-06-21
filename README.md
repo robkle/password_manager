@@ -13,11 +13,11 @@ Repository contains a Makefile for:
 * deleting executable (**make fclean**)  
 * recompiling (**make re**)    
 
-Generate password:  
+View passwords:  
 ```ts
-./pwd generate
+./pwd
 ```
-Generate password for an application (e.g. gmail) and write to file:  
+Insert password for an application (e.g. gmail) and write to file:  
 ```ts
-./pwd generate gmail
+./pwd insert gmail <password>
 ```
