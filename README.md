@@ -1,11 +1,11 @@
 # password_manager
 Unix (command-line) password manager written in C++
 
-Work in progress...  
+Work in progress...   
 
 ### Current features
-* Password generator  
-* Write generated password to file (.store)
+* Insert passwords to file (.store)  
+* View passwords
 
 ### Usage
 Repository contains a Makefile for:   
