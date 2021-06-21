@@ -5,6 +5,7 @@
 #include <string>
 #include <cstring>
 #include <fstream>
+#include <vector>
 
 # define UPPERCASE "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # define LOWERCASE "abcdefghijklmnopqrstuvwxyz"

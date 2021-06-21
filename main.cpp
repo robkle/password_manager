@@ -1,18 +1,73 @@
 #include "pwd.h"
+#include <filesystem>
 
-class Create
+class vault
 {
 public :
-	static void store(std::string service, std::string psswd)
+	std::vector<std::string>	pswd;
+	
+	vault()
 	{
-		std::string str;
-		std::ofstream outfile;
+		std::string line;
+		std::ifstream myfile;
 
-		str.append(service);
+		myfile.open(DEST);
+		if (!myfile.is_open())
+		{
+			perror("Error open");
+			exit (EXIT_FAILURE);
+		}
+		while(std::getline(myfile, line))
+		{
+			this->pswd.push_back(line);
+		}
+	}
+};
+
+class invault : public vault
+{
+public :
+	void insert(std::string var, std::string val)
+	{
+		int				i;
+		std::string		str;
+		std::ofstream	outfile;
+
+		str.append(var);
 		str.append("=");
-		str.append(psswd);
-		outfile.open(DEST, std::ios_base::app);
-		outfile << str << std::endl;
+		str.append(val);
+		i = -1;
+		while (++i < this->pswd.size())
+		{
+			if (str.compare(this->pswd.at(i)) <= 0)
+			{
+				this->pswd.insert(this->pswd.begin() + i, str);
+				break;
+			}
+		}
+		if (i == this->pswd.size() || this->pswd.empty())
+			this->pswd.push_back(str);
+		outfile.open(DEST, std::ios_base::trunc);
+		i = -1;
+		while (++i < this->pswd.size())
+		{
+			outfile << this->pswd.at(i) << std::endl;
+		}
+	}
+};
+
+class outvault : public vault
+{
+public :
+	void printall()
+	{
+		int i;
+	
+		i = -1;
+		while (++i < this->pswd.size())
+		{
+			std::cout << this->pswd.at(i) << std::endl;
+		}
 	}
 };
 
@@ -37,18 +92,24 @@ public :
 	}	
 };
 
+/*
+** currently main is used to test existing classes
+*/
 int	main(int argc, char **argv)
 {
-	std::string psswd;
-	//add
-	// generate
-	if (argc >= 2 && strcmp(argv[1], "generate") == 0)
+	
+	if (argc == 1)
 	{
-		psswd = Generate::pwd(16);
-		if (argc == 2)
-			std::cout << psswd << std::endl;
-		if (argc == 3)
-			Create::store(argv[2], psswd);
+		outvault	pwd;
+		pwd.printall();
+	}
+	else if (argc >= 2)
+	{
+		if (strcmp(argv[1], "insert") == 0)
+		{
+			invault		store;
+			store.insert(argv[2], argv[3]);
+		}
 	}
 	return (0);
 }
