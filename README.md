@@ -5,19 +5,36 @@ Work in progress...
 
 ### Current features
 * Insert passwords to file (.store)  
-* View passwords
+* View passwords  
+* Remove passwords  
 
 ### Usage
 Repository contains a Makefile for:   
 * compiling executable (**make all**)  
-* deleting executable (**make fclean**)  
+* deleting executable (**make clean**)  
 * recompiling (**make re**)    
 
-View passwords:  
+View all stored passwords:  
 ```ts
-./pwd
+./pw
 ```
-Insert password for an application (e.g. gmail) and write to file:  
+View stored password for defined application:  
 ```ts
-./pwd insert gmail <password>
+./pw <application>  
+```
+Generate and display password:
+```ts
+./pw create
+```
+Insert user defined password for an application:  
+```ts
+./pw create <application> <password>
+```
+Insert generated password for an application:
+```ts
+./pw create <application>
+```
+Remove password from file:
+```ts
+./pw remove <application>  
 ```
